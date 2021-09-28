@@ -18,7 +18,7 @@
             <div class="profile-name">
               <a href=""><h3>VS Code</h3></a>
 
-              <h6>Posted <%= Date.now() - posts.added %> ago</h6>
+              <h6>Posted <%= posts.added %></h6>
             </div>
           </div>
 
@@ -52,8 +52,8 @@
 
   <% } else { %>
 
-  <div style="padding-left: 16px">
-    <h2>Top Navigation Example</h2>
+  <div style="text-align: center">
+    <h2>No Post Found</h2>
   </div>
   <% } %>
 
