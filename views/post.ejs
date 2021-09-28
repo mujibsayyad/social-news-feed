@@ -1,0 +1,32 @@
+<%- include('./includes/head.ejs') %>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+
+  <!-- <form action="/post" method="POST">
+    <label for="post-content" class="sr-only">Share</label>
+    <textarea
+      type="text"
+      name="title"
+      id="title"
+      class="widget-post__textarea scroller"
+      placeholder="What's wrong with r00tme?"
+    >
+    </textarea>
+
+    <button class="btn post-actions__publish" type="submit">publish</button>
+  </form> -->
+
+
+ 
+    <form class="post-form" action="/post" method="POST">
+        <div class="form-control">
+            <textarea type="text" name="title" id="title" placeholder="Hey! Express Your Thoughts."></textarea>
+        </div>
+        <button class="btn" type="submit">POST</button>
+      </form>
+</main>
+
+
+  <%- include('./includes/end.ejs') %>
+

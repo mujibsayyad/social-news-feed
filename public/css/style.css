@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #222831;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+
+  /* font-family: 'Titillium Web', sans-serif; */
+  /* font-family: 'Rajdhani', sans-serif; */
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  flex-direction: column;
+}
+
+.feed {
+  background-color: azure;
+  height: auto;
+  width: 25rem;
+  border-radius: 1rem;
+  margin: 1rem 0;
+}
+
+.profile-feed {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  margin: 1rem;
+}
+
+.profile-info {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.fa-user-circle {
+  font-size: 2rem;
+}
+
+.profile-img,
+.profile-name {
+  margin: 0.3rem;
+}
+
+.profile-name a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.profile-name h3 {
+  font-weight: 700;
+  color: #3c3e7c;
+  font-size: 1.2rem;
+  /* letter-spacing: 1px; */
+  font-family: Rajdhani, sans-serif;
+}
+
+.content {
+  margin: 2rem;
+  height: inherit;
+}
+
+/* -------------------------------------------------------------------------------------------- */
+
+.dropbutton {
+  padding: 14px;
+  border: none;
+  cursor: pointer;
+  width: 3.3rem;
+  fill: #3c3e7c;
+}
+
+.dropdownmenu {
+  position: relative;
+  display: inline-block;
+  outline: none;
+}
+
+.dropdownmenu-content {
+  display: none;
+  position: absolute;
+  background-color: azure;
+  min-width: 110px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  font-family: Rajdhani, sans-serif;
+  font-weight: 600;
+  right: -5px;
+}
+
+.dropdownmenu-content a {
+  color: black;
+  padding: 10px 10px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.9rem;
+}
+
+.dropdownmenu a:hover {
+  background-color: rgba(95, 95, 95, 0.13);
+}
+
+.show {
+  display: block;
+}
+
+/* /////////////////////////////////////////////////////////////////////////////////////////////// */
+
+textarea {
+  padding: 20px;
+  height: 8rem;
+  width: 25rem;
+  resize: none;
+
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: azure;
+
+  overflow: hidden;
+}
+
+.textarea {
+  height: 120px;
+  border-radius: 0;
+  border: none;
+}
+
+textarea::placeholder {
+  text-align: top;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+/* ------------------------------------------------------------------------------------------- */
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04aa6d;
+  color: white;
+}
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+.btn {
+  border: 1px solid #4005e0;
+  color: #ffffff;
+  background: rgb(118, 88, 226);
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: #00695c;
+  color: white;
+}
