@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const MONGODB_URI = 'URL';
+const MONGODB_URI =
+  'URL';
 
 const feedRoutes = require('./routes/routes');
 

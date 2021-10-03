@@ -7,17 +7,20 @@ TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 exports.getIndex = (req, res, next) => {
-  updatedPosts = Posts.map((post) => {
-    return { ...post, added: timeAgo.format() };
-  });
-
   Posts.find()
-    .then((post) => {
+    .lean()
+    .then((posts) => {
+      updatedPosts = posts.map((post) => {
+        return { ...post, time: timeAgo.format(post.createdAt) };
+      });
+
+      console.log(updatedPosts);
       res.render('index', {
         pageTitle: 'NewsFeed',
         path: '/',
-        post: post,
+        post: updatedPosts,
         // time: date,
+        pTime: posts.createdAt,
       });
     })
     .catch((err) => {
