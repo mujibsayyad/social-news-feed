@@ -14,4 +14,4 @@ app.set('views', 'views');
 
 app.use(feedRoutes);
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 3000);
