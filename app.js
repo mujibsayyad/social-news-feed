@@ -17,6 +17,7 @@ app.set('views', 'views');
 
 app.use(feedRoutes);
 
+<<<<<<< HEAD
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {
@@ -25,3 +26,6 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+=======
+app.listen(process.env.PORT || 3000);
+>>>>>>> ed8632a679c9eeeca7e4457a4055f8844709d3b8
