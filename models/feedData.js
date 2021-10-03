@@ -1,37 +1,37 @@
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
 
-module.exports = class FeedData {
-  constructor(title, addedDate) {
-    this.title = title;
-    this.addedDate = addedDate;
-  }
+// const p = path.join(
+//   path.dirname(process.mainModule.filename),
+//   'data',
+//   'post.json'
+// );
 
-  save() {
-    const p = path.join(path.dirname(__dirname, 'data', 'post.json'));
+// const getProductsFromFile = (cb) => {
+//   fs.readFile(p, (err, fileContent) => {
+//     if (err) {
+//       cb([]);
+//     } else {
+//       cb(JSON.parse(fileContent));
+//     }
+//   });
+// };
 
-    fs.readFile(p, (err, postContent) => {
-      console.log(postContent);
-      let posts;
-      if (!err) {
-        posts = JSON.parse(postContent);
-      }
-      posts.push(this);
+// module.exports = class Posts {
+//   constructor(t) {
+//     this.title = t;
+//   }
 
-      fs.writeFile(p, JSON.stringify(posts), (err) => {
-        console.log(err);
-      });
-    });
-  }
+//   save() {
+//     getProductsFromFile((products) => {
+//       products.push(this);
+//       fs.writeFile(p, JSON.stringify(products), (err) => {
+//         console.log(err);
+//       });
+//     });
+//   }
 
-  static fetchAll() {
-    const p = path.join(path.dirname(__dirname, 'data', 'post.json'));
-
-    fs.readFile(p, (err, postContent) => {
-      if (err) {
-        return [];
-      }
-      return JSON.parse(postContent);
-    });
-  }
-};
+//   static fetchAll(cb) {
+//     getProductsFromFile(cb);
+//   }
+// };
