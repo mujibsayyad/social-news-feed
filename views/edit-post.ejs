@@ -1,0 +1,16 @@
+<%- include('./includes/head.ejs') %>
+
+<body>
+  <%- include('./includes/navigation.ejs') %>
+
+    <form class="post-form" action="/post<% if (editing) { %>edit-post<% } else { %>edit-post<% } %>" method="POST">
+        <div class="form-control">
+            <textarea type="text" name="title" id="title" placeholder="Hey! Express Your Thoughts." value="<% if (editing) { %><%= posts.title %><% } %>"></textarea>
+        </div>
+        <button class="btn" type="submit">UPDATE POST</button>
+      </form>
+</main>
+
+
+  <%- include('./includes/end.ejs') %>
+

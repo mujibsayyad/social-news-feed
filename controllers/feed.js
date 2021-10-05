@@ -7,20 +7,21 @@ TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 exports.getIndex = (req, res, next) => {
+  const postId = req.params.postId;
+
   Posts.find()
     .lean()
+    .sort({ createdAt: -1 })
     .then((posts) => {
       updatedPosts = posts.map((post) => {
         return { ...post, time: timeAgo.format(post.createdAt) };
       });
 
-      console.log(updatedPosts);
+      // console.log(updatedPosts);
       res.render('index', {
         pageTitle: 'NewsFeed',
         path: '/',
         post: updatedPosts,
-        // time: date,
-        pTime: posts.createdAt,
       });
     })
     .catch((err) => {
@@ -52,4 +53,47 @@ exports.postAddPost = (req, res, next) => {
     });
 
   console.log(post);
+};
+
+exports.getEditPost = (req, res, next) => {
+  const editMode = req.query.edit;
+  if (!editMode) {
+    return res.redirect('/');
+  }
+
+  const postId = req.params.postId;
+
+  Posts.findById(postId)
+    .then((post) => {
+      if (!post) {
+        return res.redirect('/');
+      }
+      res.render('/edit-post', {
+        pageTitle: 'Edit Post',
+        path: '/edit-post',
+        editing: editMode,
+        post: post,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.postEditPost = (req, res, next) => {
+  const postId = req.body.postId;
+  const updatedTitle = req.body.title;
+
+  Posts.findById(postId)
+    .then((post) => {
+      post.title = updatedTitle;
+      return post.save();
+    })
+    .then((result) => {
+      console.log('POST UPDATED');
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

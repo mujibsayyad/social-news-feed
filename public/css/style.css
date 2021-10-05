@@ -84,6 +84,7 @@ body {
   cursor: pointer;
   width: 3.3rem;
   fill: #3c3e7c;
+  position: relative;
 }
 
 .dropdownmenu {
@@ -97,7 +98,7 @@ body {
   position: absolute;
   background-color: azure;
   min-width: 110px;
-  overflow: auto;
+  /* overflow: auto; */
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
   border-radius: 12px;
   font-family: Rajdhani, sans-serif;

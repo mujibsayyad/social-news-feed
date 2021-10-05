@@ -4,7 +4,6 @@ function btnToggle() {
 
 // Prevents menu from closing when clicked inside
 document.getElementById('Dropdown').addEventListener('click', function (event) {
-  alert('click outside');
   event.stopPropagation();
 });
 
@@ -23,6 +22,9 @@ window.onclick = function (event) {
   }
 };
 
-const dBtn = document.querySelector('.dropbutton');
+const dBtn = document.querySelectorAll('.dropbutton');
 
-dBtn.addEventListener('click', btnToggle);
+
+dBtn.forEach((p) => {
+  p.addEventListener('click', btnToggle);
+});

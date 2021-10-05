@@ -11,6 +11,12 @@ router.get('/post', feedController.getPost);
 
 router.post('/post', feedController.postAddPost);
 
+// router.post('/post/postId', feedController.postAddPost);
+
 router.get('/login', indexController.getLogin);
+
+// router.get('/edit-post/:postId', feedController.getEditPost);
+
+// router.post('/edit-post', feedController.postEditPost);
 
 module.exports = router;
