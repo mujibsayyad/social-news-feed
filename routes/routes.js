@@ -15,8 +15,8 @@ router.post('/post', feedController.postAddPost);
 
 router.get('/login', indexController.getLogin);
 
-// router.get('/edit-post/:postId', feedController.getEditPost);
+router.get('/edit-post/:postId', feedController.getEditPost);
 
-// router.post('/edit-post', feedController.postEditPost);
+router.post('/edit-post', feedController.postEditPost);
 
 module.exports = router;

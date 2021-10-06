@@ -1,6 +1,28 @@
+const main = document.querySelector('.main');
+const container = document.querySelector('.container');
+const feed = document.querySelectorAll('.feed');
+const dBtn = document.querySelectorAll('.dropbutton');
+const dropdownMenu = document.querySelectorAll('.dropdownmenu');
+const dropdownenuContent = document.querySelector('.dropdownmenu-content');
+
 function btnToggle() {
   document.getElementById('Dropdown').classList.toggle('show');
 }
+
+function feedAddEventListener() {
+  dropdownMenu.forEach((e) => {
+    e.addEventListener('click', (e) => {
+      const c = e.target.closest('.dropbutton');
+      console.log(c);
+
+      dBtn.forEach((p) => {
+        p.addEventListener('click', btnToggle);
+      });
+    });
+  });
+}
+
+feedAddEventListener();
 
 // Prevents menu from closing when clicked inside
 document.getElementById('Dropdown').addEventListener('click', function (event) {
@@ -21,10 +43,3 @@ window.onclick = function (event) {
     }
   }
 };
-
-const dBtn = document.querySelectorAll('.dropbutton');
-
-
-dBtn.forEach((p) => {
-  p.addEventListener('click', btnToggle);
-});
