@@ -28,7 +28,8 @@
               <svg
                 aria-selected="true"
                 class="dropbutton"
-                id="svg-more-dots <%= posts._id %>"
+                data-id="<%= posts._id %>"
+                id="svg-more-dots"
                 viewBox="0 0 22 6"
                 preserveAspectRatio="xMinYMin meet"
               >
@@ -37,7 +38,11 @@
                 ></path>
               </svg>
 
-              <div id="Dropdown" class="dropdownmenu-content">
+              <div
+                id="Dropdown"
+                data-toggle="<%= posts._id %>"
+                class="dropdownmenu-content"
+              >
                 <a href="/edit-post/<%= posts._id %> ">Edit Post</a>
                 <a href="#delete">Delete Post</a>
               </div>

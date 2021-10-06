@@ -5,8 +5,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const MONGODB_URI =
-  'mongodb+srv://mongo:mongo@cluster0.vhyub.mongodb.net/social-news-feed';
+const MONGODB_URI = process.env.db_url;
 
 const feedRoutes = require('./routes/routes');
 
