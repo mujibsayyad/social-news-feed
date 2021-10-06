@@ -3,14 +3,30 @@
 <body>
   <%- include('./includes/navigation.ejs') %>
 
-    <form class="post-form" action="/post<% if (editing) { %>edit-post<% } else { %>edit-post<% } %>" method="POST">
-        <div class="form-control">
-            <textarea type="text" name="title" id="title" placeholder="Hey! Express Your Thoughts." value="<% if (editing) { %><%= posts.title %><% } %>"></textarea>
-        </div>
-        <button class="btn" type="submit">UPDATE POST</button>
-      </form>
-</main>
+  <form
+    class="post-form"
+    action="/<% if (editing) { %>edit-post<% } else { %>post<% } %>"
+    method="POST"
+  >
+    <div class="form-control">
+      <textarea
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Hey! Express Your Thoughts."
+      >
+<% if (editing) { %><%= post.title %><% } %></textarea
+      >
+    </div>
 
+    <% if (editing) { %>
+    <input type="hidden" value="<%= post._id %>" name="postId" />
+    <% } %>
+
+    <button class="btn" type="submit">
+      <% if (editing) { %>Update Post<% } else { %>Add Post<% } %>
+    </button>
+  </form>
 
   <%- include('./includes/end.ejs') %>
-
+</body>

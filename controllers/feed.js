@@ -60,15 +60,13 @@ exports.getEditPost = (req, res, next) => {
   if (!editMode) {
     return res.redirect('/');
   }
-
   const postId = req.params.postId;
-
   Posts.findById(postId)
     .then((post) => {
       if (!post) {
         return res.redirect('/');
       }
-      res.render('/edit-post', {
+      res.render('edit-post', {
         pageTitle: 'Edit Post',
         path: '/edit-post',
         editing: editMode,

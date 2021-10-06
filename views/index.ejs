@@ -26,7 +26,6 @@
 
             <div class="dropdownmenu">
               <svg
-                aria-selected="true"
                 class="dropbutton"
                 data-id="<%= posts._id %>"
                 id="svg-more-dots"
@@ -43,7 +42,7 @@
                 data-toggle="<%= posts._id %>"
                 class="dropdownmenu-content"
               >
-                <a href="/edit-post/<%= posts._id %> ">Edit Post</a>
+                <a href="/edit-post/<%= posts._id %>?edit=true">Edit Post</a>
                 <a href="#delete">Delete Post</a>
               </div>
             </div>
