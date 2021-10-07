@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const Posts = require('../models/post');
 
 const TimeAgo = require('javascript-time-ago');
@@ -7,9 +9,8 @@ TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 exports.getIndex = (req, res, next) => {
-  const postId = req.params.postId;
-
   Posts.find()
+    .populate('user')
     .lean()
     .sort({ createdAt: -1 })
     .then((posts) => {
@@ -17,7 +18,7 @@ exports.getIndex = (req, res, next) => {
         return { ...post, time: timeAgo.format(post.createdAt) };
       });
 
-      // console.log(updatedPosts);
+      console.log(posts);
       res.render('index', {
         pageTitle: 'NewsFeed',
         path: '/',
@@ -38,10 +39,16 @@ exports.getPost = (req, res, next) => {
 
 exports.postAddPost = (req, res, next) => {
   const title = req.body.title;
+  const user = req.userId;
 
   const post = new Posts({
     title: title,
+    // userId: mongoose.Types.ObjectId(req.userId),
+    user: req.user,
   });
+
+  console.log(`-------------${req.user}`);
+
   post
     .save()
     .then((result) => {
@@ -89,6 +96,18 @@ exports.postEditPost = (req, res, next) => {
     })
     .then((result) => {
       console.log('POST UPDATED');
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.postDeletePost = (req, res, next) => {
+  const postId = req.body.postId;
+  Posts.findByIdAndRemove(postId)
+    .then(() => {
+      console.log('POST DELETED');
       res.redirect('/');
     })
     .catch((err) => {

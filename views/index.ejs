@@ -9,7 +9,7 @@
     <div class="container">
       <% for(let posts of post) { %>
       <!-- //////////////////////////////////////////////////////////////////////////////////// -->
-      <div class="feed <%= posts._id %>">
+      <div class="feed">
         <div class="profile">
           <div class="profile-feed">
             <div class="profile-info">
@@ -43,7 +43,11 @@
                 class="dropdownmenu-content"
               >
                 <a href="/edit-post/<%= posts._id %>?edit=true">Edit Post</a>
-                <a href="#delete">Delete Post</a>
+
+                <form action="/delete-post" method="POST">
+                  <input type="hidden" value="<%= posts._id %>" name="postId" />
+                  <button class="btn" type="submit">Delete</button>
+                </form>
               </div>
             </div>
           </div>
