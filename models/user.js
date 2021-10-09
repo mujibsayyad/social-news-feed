@@ -11,11 +11,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  post: {
-    type: Schema.Types.ObjectId,
-    ref: 'Post',
-    required: true,
-  },
+  // post: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Post',
+  //   required: true,
+  // },
 });
 
 module.exports = mongoose.model('User', userSchema);

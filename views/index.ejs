@@ -25,6 +25,7 @@
             </div>
 
             <div class="dropdownmenu">
+              <% if (isAuthenticated) { %>
               <svg
                 class="dropbutton"
                 data-id="<%= posts._id %>"
@@ -49,6 +50,7 @@
                   <button class="btn" type="submit">Delete</button>
                 </form>
               </div>
+              <% } %>
             </div>
           </div>
 

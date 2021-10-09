@@ -2,4 +2,8 @@
   <a class="active" href="/">Home</a>
   <a href="/post">Post</a>
   <a href="/login">Login</a>
+
+  <% if (isAuthenticated) { %>
+  <a href="/signUp">signUp</a>
+  <% } %>
 </div>

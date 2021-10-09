@@ -17,12 +17,12 @@ exports.getIndex = (req, res, next) => {
       updatedPosts = posts.map((post) => {
         return { ...post, time: timeAgo.format(post.createdAt) };
       });
-
-      console.log(posts);
+      console.log(req.isLoggedIn);
       res.render('index', {
         pageTitle: 'NewsFeed',
         path: '/',
         post: updatedPosts,
+        isAuthenticated: req.isLoggedIn,
       });
     })
     .catch((err) => {
@@ -34,20 +34,18 @@ exports.getPost = (req, res, next) => {
   res.render('post', {
     pageTitle: 'Create Post',
     path: '/post',
+    isAuthenticated: req.isLoggedIn,
   });
 };
 
 exports.postAddPost = (req, res, next) => {
   const title = req.body.title;
-  const user = req.userId;
 
   const post = new Posts({
     title: title,
-    // userId: mongoose.Types.ObjectId(req.userId),
     user: req.user,
+    isAuthenticated: req.isLoggedIn,
   });
-
-  console.log(`-------------${req.user}`);
 
   post
     .save()
@@ -78,6 +76,7 @@ exports.getEditPost = (req, res, next) => {
         path: '/edit-post',
         editing: editMode,
         post: post,
+        isAuthenticated: req.isLoggedIn,
       });
     })
     .catch((err) => {
