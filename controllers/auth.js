@@ -15,8 +15,8 @@ const timeAgo = new TimeAgo('en-US');
 const transporter = nodemailer.createTransport({
   service: 'SendinBlue', // no need to set host or port etc.
   auth: {
-    user: 'idontknow011012@gmail.com',
-    pass: 'zFIstQ79gU1V4kLB',
+    user: process.env.sb_user,
+    pass: process.env.sb_pass,
     api_key: process.env.sb_url,
   },
 });
@@ -239,21 +239,22 @@ exports.postNewPassword = (req, res, next) => {
 };
 
 exports.userProfile = (req, res, next) => {
-  // const user = req.params.user;
-  Posts.find({ user: req.user._id })
+  Posts.find({ user: req.user?._id })
+    .populate('user')
     .lean()
     .sort({ createdAt: -1 })
-    .then((post) => {
-      // updatedPosts = post.forEach((post) => {
-      //   return { ...post, time: timeAgo.format(post.createdAt) };
-      // });
+    .then((posts) => {
+      userPost = posts.filter((posts) => posts._id === req.user.name);
+
+      updatedPosts = posts.map((post) => {
+        return { ...post, time: timeAgo.format(post.createdAt) };
+      });
 
       res.render('auth/user-profile', {
         path: '/profile',
         pageTitle: 'Profile',
-        // post: updatedPosts,
-        post: post,
-        // user: post.user._id,
+        post: updatedPosts,
+        name: req.user.name,
       });
     })
     .catch((err) => {

@@ -22,7 +22,6 @@ exports.getIndex = (req, res, next) => {
         pageTitle: 'NewsFeed',
         path: '/',
         post: updatedPosts,
-        // user: req.session.user,
       });
     })
     .catch((err) => {
