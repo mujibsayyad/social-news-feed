@@ -4,16 +4,18 @@ const router = express.Router();
 
 const feedController = require('../controllers/feed');
 
+const isAuth = require('../middleware/is-auth');
+
 router.get('/', feedController.getIndex);
 
-router.get('/post', feedController.getPost);
+router.get('/post', isAuth, feedController.getPost);
 
-router.post('/post', feedController.postAddPost);
+router.post('/post', isAuth, feedController.postAddPost);
 
-router.get('/edit-post/:postId', feedController.getEditPost);
+router.get('/edit-post/:postId', isAuth, feedController.getEditPost);
 
-router.post('/edit-post', feedController.postEditPost);
+router.post('/edit-post', isAuth, feedController.postEditPost);
 
-router.post('/delete-post', feedController.postDeletePost);
+router.post('/delete-post', isAuth, feedController.postDeletePost);
 
 module.exports = router;

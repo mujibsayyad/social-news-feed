@@ -14,18 +14,21 @@
           <div class="profile-feed">
             <div class="profile-info">
               <div class="profile-img">
-                <i class="fas fa-user-circle"></i>
+                <i class="fas fa-user-circle"> </i>
               </div>
 
               <div class="profile-name">
-                <a href=""><h3>VS Code</h3></a>
+                <a href="/profile/<%= posts._id %> "
+                  ><h3><%= posts.user.name %></h3></a
+                >
 
                 <h6>Posted <%= posts.time %></h6>
               </div>
             </div>
 
+            <% if (isAuthenticated) { %>
+
             <div class="dropdownmenu">
-              <% if (isAuthenticated) { %>
               <svg
                 class="dropbutton"
                 data-id="<%= posts._id %>"
@@ -47,11 +50,12 @@
 
                 <form action="/delete-post" method="POST">
                   <input type="hidden" value="<%= posts._id %>" name="postId" />
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                   <button class="btn" type="submit">Delete</button>
                 </form>
               </div>
-              <% } %>
             </div>
+            <% } %>
           </div>
 
           <div class="content">

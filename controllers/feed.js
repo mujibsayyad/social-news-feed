@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-
 const Posts = require('../models/post');
 
 const TimeAgo = require('javascript-time-ago');
@@ -17,12 +15,14 @@ exports.getIndex = (req, res, next) => {
       updatedPosts = posts.map((post) => {
         return { ...post, time: timeAgo.format(post.createdAt) };
       });
-      console.log(req.isLoggedIn);
+
+      // console.log(updatedPosts);
+
       res.render('index', {
         pageTitle: 'NewsFeed',
         path: '/',
         post: updatedPosts,
-        isAuthenticated: req.isLoggedIn,
+        // user: req.session.user,
       });
     })
     .catch((err) => {
@@ -34,7 +34,6 @@ exports.getPost = (req, res, next) => {
   res.render('post', {
     pageTitle: 'Create Post',
     path: '/post',
-    isAuthenticated: req.isLoggedIn,
   });
 };
 
@@ -44,7 +43,6 @@ exports.postAddPost = (req, res, next) => {
   const post = new Posts({
     title: title,
     user: req.user,
-    isAuthenticated: req.isLoggedIn,
   });
 
   post
@@ -56,8 +54,6 @@ exports.postAddPost = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
-
-  console.log(post);
 };
 
 exports.getEditPost = (req, res, next) => {
@@ -76,7 +72,6 @@ exports.getEditPost = (req, res, next) => {
         path: '/edit-post',
         editing: editMode,
         post: post,
-        isAuthenticated: req.isLoggedIn,
       });
     })
     .catch((err) => {
@@ -90,12 +85,14 @@ exports.postEditPost = (req, res, next) => {
 
   Posts.findById(postId)
     .then((post) => {
+      if (post.user.toString() !== req.user._id.toString()) {
+        return res.redirect('/');
+      }
       post.title = updatedTitle;
-      return post.save();
-    })
-    .then((result) => {
-      console.log('POST UPDATED');
-      res.redirect('/');
+      return post.save().then((result) => {
+        console.log('POST UPDATED');
+        res.redirect('/');
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -104,7 +101,7 @@ exports.postEditPost = (req, res, next) => {
 
 exports.postDeletePost = (req, res, next) => {
   const postId = req.body.postId;
-  Posts.findByIdAndRemove(postId)
+  Posts.deleteOne({ _id: postId, user: req.user._id })
     .then(() => {
       console.log('POST DELETED');
       res.redirect('/');

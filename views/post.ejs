@@ -8,6 +8,7 @@
         <div class="form-control">
             <textarea type="text" name="title" id="title" placeholder="Hey! Express Your Thoughts."></textarea>
         </div>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <button class="btn" type="submit">POST</button>
       </form>
 </main>

@@ -23,6 +23,7 @@
     <input type="hidden" value="<%= post._id %>" name="postId" />
     <% } %>
 
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
     <button class="btn" type="submit">
       <% if (editing) { %>Update Post<% } else { %>Add Post<% } %>
     </button>

@@ -1,9 +1,23 @@
 <div class="topnav">
   <a class="active" href="/">Home</a>
-  <a href="/post">Post</a>
-  <a href="/login">Login</a>
 
   <% if (isAuthenticated) { %>
-  <a href="/signUp">signUp</a>
+  <a href="/post">Post</a>
+  <a href="/profile/">Profile</a>
+
+  <% } %>
+
+  <!-- ************************************* -->
+  <% if (!isAuthenticated) { %>
+  <!-- ----------------------------------- -->
+
+  <a href="/login">Login</a>
+
+  <a href="/signup">Sign Up</a>
+  <% } else { %>
+  <form action="/logout" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <button class="btn" type="submit">Logout</button>
+  </form>
   <% } %>
 </div>

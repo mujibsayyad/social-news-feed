@@ -30,16 +30,8 @@
   box-sizing: border-box;
 }
 
-body,
-html {
-  height: 100%;
-  font-family: Poppins-Regular, sans-serif;
-}
-
 /*---------------------------------------------*/
 a {
-  font-family: Poppins-Regular;
-  font-size: 14px;
   line-height: 1.7;
   color: #666666;
   margin: 0px;
@@ -484,4 +476,34 @@ iframe {
     visibility: visible;
     opacity: 1;
   }
+}
+
+.user-message {
+  margin: auto;
+  width: 90%;
+  border: 1px solid #4771fa;
+  padding: 0.8rem;
+  border-radius: 3px;
+  background: #b9c9ff;
+  text-align: center;
+  margin-top: 2rem;
+  color: #c80000;
+  font-weight: 400;
+  font-family: Poppins-Regular;
+}
+
+.user-message--error {
+  border-color: red;
+  background: rgb(255, 176, 176);
+  color: red;
+}
+
+@media (min-width: 768px) {
+  .user-message {
+    width: 30rem;
+  }
+}
+
+.newpass {
+  color: #fff;
 }

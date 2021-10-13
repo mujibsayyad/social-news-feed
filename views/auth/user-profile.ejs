@@ -1,0 +1,154 @@
+<%- include('../includes/head.ejs') %>
+
+<link rel="stylesheet" href="/css/user-profile.css" />
+
+<!-- -------------------------------------------------------------------------------------------   -->
+<!-- -------------------------------------------------------------------------------------------   -->
+<%- include('../includes/navigation.ejs') %>
+
+<div class="wrapper">
+  <div class="profile-card js-profile-card">
+    <div class="profile__header">
+      <img
+        class="profile__background"
+        src="https://images.unsplash.com/photo-1562813733-b31f71025d54?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=869&q=80"
+      />
+    </div>
+
+    <div class="profile-card__img">
+      <img
+        src="https://images.unsplash.com/photo-1582266255765-fa5cf1a1d501?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80"
+        alt="profile card"
+      />
+    </div>
+
+    <div class="profile-card__cnt js-profile-cnt">
+      <div class="profile-card__name">User</div>
+      <div class="profile-card__txt">Front-end Developer from</div>
+      <div class="profile-card-loc">
+        <span class="profile-card-loc__txt"> --- </span>
+      </div>
+
+      <div class="profile-card-inf">
+        <div class="profile-card-inf__item">
+          <div class="profile-card-inf__title">1B+</div>
+          <div class="profile-card-inf__txt">Followers</div>
+        </div>
+
+        <div class="profile-card-inf__item">
+          <div class="profile-card-inf__title">65</div>
+          <div class="profile-card-inf__txt">Following</div>
+        </div>
+
+        <div class="profile-card-inf__item">
+          <div class="profile-card-inf__title">123</div>
+          <div class="profile-card-inf__txt">Articles</div>
+        </div>
+
+        <div class="profile-card-inf__item">
+          <div class="profile-card-inf__title">85</div>
+          <div class="profile-card-inf__txt">Works</div>
+        </div>
+      </div>
+
+      <!--  -->
+
+      <!-- <div class="profile-card-ctr">
+        <button class="profile-card__button button--blue js-message-btn">
+          Message
+        </button>
+        <button class="profile-card__button button--orange">Follow</button>
+      </div> -->
+    </div>
+
+    <!-- <div class="profile-card-message js-message">
+      <form class="profile-card-form">
+        <div class="profile-card-form__container">
+          <textarea placeholder="Say something..."></textarea>
+        </div>
+
+        <div class="profile-card-form__bottom">
+          <button class="profile-card__button button--blue js-message-close">
+            Send
+          </button>
+
+          <button class="profile-card__button button--gray js-message-close">
+            Cancel
+          </button>
+        </div>
+      </form>
+
+      <div class="profile-card__overlay js-message-close"></div>
+    </div> -->
+  </div>
+</div>
+
+<main class="main">
+  <!-- ------------ -->
+  <% if (post.length > 0) { %>
+  <div class="container">
+    <% for(let posts of post) { %>
+    <!-- //////////////////////////////////////////////////////////////////////////////////// -->
+    <div class="feed">
+      <div class="profile">
+        <div class="profile-feed">
+          <div class="profile-info">
+            <div class="profile-img">
+              <i class="fas fa-user-circle"></i>
+            </div>
+
+            <div class="profile-name">
+              <a href=""><h3>VS Code</h3></a>
+
+              <h6>Posted <%= posts.time %></h6>
+            </div>
+          </div>
+
+          <% if (isAuthenticated) { %>
+
+          <div class="dropdownmenu">
+            <svg
+              class="dropbutton"
+              data-id="<%= posts._id %>"
+              id="svg-more-dots"
+              viewBox="0 0 22 6"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <path
+                d="M19,6c-1.657,0-3-1.344-3-3c0-1.656,1.343-3,3-3s3,1.344,3,3C22,4.656,20.657,6,19,6z M19,2c-0.553,0-1,0.447-1,1c0,0.552,0.447,1,1,1c0.552,0,1-0.449,1-1C20,2.447,19.552,2,19,2z M11,6C9.343,6,8,4.656,8,3c0-1.656,1.343-3,3-3s3,1.344,3,3C14,4.656,12.657,6,11,6z M11,2c-0.553,0-1,0.447-1,1c0,0.552,0.447,1,1,1c0.552,0,1-0.449,1-1C12,2.447,11.552,2,11,2z M3,6C1.343,6,0,4.656,0,3c0-1.656,1.343-3,3-3c1.656,0,3,1.344,3,3C6,4.656,4.656,6,3,6z M3,2C2.447,2,2,2.447,2,3c0,0.552,0.447,1,1,1c0.552,0,1-0.449,1-1C4,2.447,3.552,2,3,2z"
+              ></path>
+            </svg>
+
+            <div
+              id="Dropdown"
+              data-toggle="<%= posts._id %>"
+              class="dropdownmenu-content"
+            >
+              <a href="/edit-post/<%= posts._id %>?edit=true">Edit Post</a>
+
+              <form action="/delete-post" method="POST">
+                <input type="hidden" value="<%= posts._id %>" name="postId" />
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button class="btn" type="submit">Delete</button>
+              </form>
+            </div>
+          </div>
+          <% } %>
+        </div>
+
+        <div class="content">
+          <h1><%= posts.title %></h1>
+        </div>
+      </div>
+    </div>
+
+    <% } %>
+  </div>
+
+  <% } else { %>
+
+  <div style="text-align: center">
+    <h2>No Post Found</h2>
+  </div>
+  <% } %>
+</main>
