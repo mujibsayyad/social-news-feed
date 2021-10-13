@@ -15,8 +15,8 @@ const timeAgo = new TimeAgo('en-US');
 const transporter = nodemailer.createTransport({
   service: 'SendinBlue', // no need to set host or port etc.
   auth: {
-    user: 'idontknow011012@gmail.com',
-    pass: 'zFIstQ79gU1V4kLB',
+    user: 'process.env.sb_user',
+    pass: 'process.env.sb_pass',
     api_key: process.env.sb_url,
   },
 });
