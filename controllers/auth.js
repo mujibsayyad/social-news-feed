@@ -244,17 +244,18 @@ exports.userProfile = (req, res, next) => {
     .lean()
     .sort({ createdAt: -1 })
     .then((posts) => {
-      userPost = posts.filter((posts) => posts._id === req.user.name);
+      userPost = posts.filter((posts) => posts.name === req.user._id);
 
       updatedPosts = posts.map((post) => {
         return { ...post, time: timeAgo.format(post.createdAt) };
       });
 
+      console.log(userPost);
+
       res.render('auth/user-profile', {
         path: '/profile',
         pageTitle: 'Profile',
-        post: updatedPosts,
-        name: req.user.name,
+        post: userPost,
       });
     })
     .catch((err) => {
