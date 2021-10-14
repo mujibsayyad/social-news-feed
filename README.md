@@ -15,10 +15,16 @@
 npm install
 ```
 
-## Running the app
+## For Nodemon
+
+Go to package.json
+in scripts > start
+```
+nodemon app.js
+```
+
+## Run the app
 
 ```
-npm  start
-
+npm start
 ```
-
