@@ -1,20 +1,20 @@
-const crypto = require('crypto');
-const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
+const crypto = require("crypto");
+const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
 // const sendinBlue = require('nodemailer-sendinblue-transport');
 
-const Posts = require('../models/post');
-const User = require('../models/user');
+const Posts = require("../models/post");
+const User = require("../models/user");
 
-const TimeAgo = require('javascript-time-ago');
-const en = require('javascript-time-ago/locale/en.json');
-const post = require('../models/post');
+const TimeAgo = require("javascript-time-ago");
+const en = require("javascript-time-ago/locale/en.json");
+const post = require("../models/post");
 TimeAgo.addLocale(en);
 // Create formatter (English).
-const timeAgo = new TimeAgo('en-US');
+const timeAgo = new TimeAgo("en-US");
 
 const transporter = nodemailer.createTransport({
-  service: 'SendinBlue', // no need to set host or port etc.
+  service: "SendinBlue", // no need to set host or port etc.
   auth: {
     user: process.env.sb_user,
     pass: process.env.sb_pass,
@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 });
 
 exports.getLogin = (req, res, next) => {
-  let message = req.flash('error');
+  let message = req.flash("error");
 
   if (message.length > 0) {
     message = message[0];
@@ -31,9 +31,9 @@ exports.getLogin = (req, res, next) => {
     message = null;
   }
 
-  res.render('auth/login', {
-    pageTitle: 'Login',
-    path: '/login',
+  res.render("auth/login", {
+    pageTitle: "Login",
+    path: "/login",
     errorMessage: message,
   });
 };
@@ -44,8 +44,8 @@ exports.postLogin = (req, res, next) => {
 
   User.findOne({ email: email }).then((user) => {
     if (!user) {
-      req.flash('error', 'No user found with this email');
-      return res.redirect('/login');
+      req.flash("error", "No user found with this email");
+      return res.redirect("/login");
     }
 
     bcrypt.compare(password, user.password).then((doMatch) => {
@@ -55,11 +55,11 @@ exports.postLogin = (req, res, next) => {
 
         return req.session.save((err) => {
           // console.log(err);
-          return res.redirect('/');
+          return res.redirect("/");
         });
       }
-      req.flash('error', 'Invalid Email or Password');
-      res.redirect('/login');
+      req.flash("error", "Invalid Email or Password");
+      res.redirect("/login");
     });
   });
 };
@@ -67,12 +67,12 @@ exports.postLogin = (req, res, next) => {
 exports.postLogout = (req, res, next) => {
   req.session.destroy((err) => {
     // console.log(err);
-    res.redirect('/');
+    res.redirect("/");
   });
 };
 
 exports.getSignUp = (req, res, next) => {
-  let message = req.flash('error');
+  let message = req.flash("error");
 
   if (message.length > 0) {
     message = message[0];
@@ -80,9 +80,9 @@ exports.getSignUp = (req, res, next) => {
     message = null;
   }
 
-  res.render('auth/signup', {
-    pageTitle: 'Sign Up',
-    path: '/signup',
+  res.render("auth/signup", {
+    pageTitle: "Sign Up",
+    path: "/signup",
     errorMessage: message,
   });
 };
@@ -96,8 +96,8 @@ exports.postSignUp = (req, res, next) => {
   User.findOne({ email: email })
     .then((userExist) => {
       if (userExist) {
-        req.flash('error', 'Email exists already, please pick different one.');
-        return res.redirect('/signup');
+        req.flash("error", "Email exists already, please pick different one.");
+        return res.redirect("/signup");
       }
       return bcrypt
         .hash(password, 12)
@@ -110,11 +110,11 @@ exports.postSignUp = (req, res, next) => {
           return user.save();
         })
         .then((result) => {
-          res.redirect('/login');
+          res.redirect("/login");
           return transporter.sendMail({
             to: email,
-            from: 'admin@socialnewsfeed.herokuapp.com',
-            subject: 'Signup succeeded!',
+            from: "admin@socialnewsfeed.herokuapp.com",
+            subject: "Signup succeeded!",
             html: `<h1>You Have successfully signed up!</h1>
                     <h1>click below link to login</h1><br>
                     <a href="https://socialnewsfeed.herokuapp.com/login">Click To Login</a>`,
@@ -130,7 +130,7 @@ exports.postSignUp = (req, res, next) => {
 };
 
 exports.getReset = (req, res, next) => {
-  let message = req.flash('error');
+  let message = req.flash("error");
 
   if (message.length > 0) {
     message = message[0];
@@ -138,9 +138,9 @@ exports.getReset = (req, res, next) => {
     message = null;
   }
 
-  res.render('auth/reset', {
-    pageTitle: 'Reset Password',
-    path: '/reset',
+  res.render("auth/reset", {
+    pageTitle: "Reset Password",
+    path: "/reset",
     errorMessage: message,
   });
 };
@@ -149,27 +149,27 @@ exports.postReset = (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
       console.log(err);
-      return res.redirect('/reset');
+      return res.redirect("/reset");
     }
 
-    const token = buffer.toString('hex');
+    const token = buffer.toString("hex");
     User.findOne({ email: req.body.email })
       .then((user) => {
         if (!user) {
-          req.flash('error', 'no account with this email found');
-          return res.redirect('/reset');
+          req.flash("error", "no account with this email found");
+          return res.redirect("/reset");
         }
         user.resetToken = token;
         user.resetTokenExpiration = Date.now() + 3600000;
         return user.save();
       })
       .then((result) => {
-        res.redirect('/');
+        res.redirect("/");
 
         transporter.sendMail({
           to: req.body.email,
-          from: 'admin@socialnewsfeed.herokuapp.com',
-          subject: 'Password Reset!',
+          from: "admin@socialnewsfeed.herokuapp.com",
+          subject: "Password Reset!",
           html: `<p>You requested a password reset</p>
                    <p>click below link to reset password</p>
                    <a href="http://localhost:3000/reset/${token}">Click To Reset</a>`,
@@ -188,7 +188,7 @@ exports.getNewPassword = (req, res, next) => {
     resetTokenExpiration: { $gt: Date.now() },
   })
     .then((user) => {
-      let message = req.flash('error');
+      let message = req.flash("error");
 
       if (message.length > 0) {
         message = message[0];
@@ -196,9 +196,9 @@ exports.getNewPassword = (req, res, next) => {
         message = null;
       }
 
-      res.render('auth/new-password', {
-        pageTitle: 'New Password',
-        path: '/new-password',
+      res.render("auth/new-password", {
+        pageTitle: "New Password",
+        path: "/new-password",
         errorMessage: message,
         userId: user._id.toString(),
         passwordToken: token,
@@ -232,7 +232,7 @@ exports.postNewPassword = (req, res, next) => {
       return resetUser.save();
     })
     .then((result) => {
-      res.redirect('/login');
+      res.redirect("/login");
     })
     .catch((err) => {
       console.log(err);
@@ -241,10 +241,12 @@ exports.postNewPassword = (req, res, next) => {
 
 exports.userProfile = (req, res, next) => {
   const userId = req.params.user;
+  console.log(userId);
 
   // Posts.find({ user: req.user?._id, post: req.post?._id })
-  Posts.find({ user: req.user?.id })
-    .populate('user')
+  // Posts.find({ user: req.user?.id })
+  Posts.find({ user: userId })
+    .populate("user")
     .lean()
     .sort({ createdAt: -1 })
     .then((posts) => {
@@ -254,9 +256,9 @@ exports.userProfile = (req, res, next) => {
         return { ...post, time: timeAgo.format(post.createdAt) };
       });
 
-      res.render('auth/user-profile', {
-        path: '/profile',
-        pageTitle: 'Profile',
+      res.render("auth/user-profile", {
+        path: "/profile",
+        pageTitle: "Profile",
         post: updatedPosts,
       });
     })
