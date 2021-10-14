@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
   },
   "author": "Mujib Sayyad",
   "license": "ISC",
@@ -23,5 +24,8 @@
     "mongoose": "^6.0.8",
     "nodemailer": "^6.7.0",
     "nodemailer-sendinblue-transport": "^1.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
   }
 }
