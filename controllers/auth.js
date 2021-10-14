@@ -8,6 +8,7 @@ const User = require('../models/user');
 
 const TimeAgo = require('javascript-time-ago');
 const en = require('javascript-time-ago/locale/en.json');
+const post = require('../models/post');
 TimeAgo.addLocale(en);
 // Create formatter (English).
 const timeAgo = new TimeAgo('en-US');
@@ -239,23 +240,24 @@ exports.postNewPassword = (req, res, next) => {
 };
 
 exports.userProfile = (req, res, next) => {
-  Posts.find({ user: req.user?._id })
+  const userId = req.params.user;
+
+  // Posts.find({ user: req.user?._id, post: req.post?._id })
+  Posts.find({ user: req.user?.id })
     .populate('user')
     .lean()
     .sort({ createdAt: -1 })
     .then((posts) => {
-      userPost = posts.filter((posts) => posts.name === req.user._id);
+      // userPost = posts.filter((post) => post.name === req.user._id);
 
       updatedPosts = posts.map((post) => {
         return { ...post, time: timeAgo.format(post.createdAt) };
       });
 
-      console.log(userPost);
-
       res.render('auth/user-profile', {
         path: '/profile',
         pageTitle: 'Profile',
-        post: userPost,
+        post: updatedPosts,
       });
     })
     .catch((err) => {

@@ -16,8 +16,6 @@ exports.getIndex = (req, res, next) => {
         return { ...post, time: timeAgo.format(post.createdAt) };
       });
 
-      // console.log(updatedPosts);
-
       res.render('index', {
         pageTitle: 'NewsFeed',
         path: '/',
