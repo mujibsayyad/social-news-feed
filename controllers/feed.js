@@ -1,7 +1,7 @@
-const Posts = require('../models/post');
-
 const TimeAgo = require('javascript-time-ago');
 const en = require('javascript-time-ago/locale/en.json');
+const Posts = require('../models/post');
+
 TimeAgo.addDefaultLocale(en);
 // Create formatter (English).
 const timeAgo = new TimeAgo('en-US');
@@ -23,7 +23,10 @@ exports.getIndex = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -49,7 +52,10 @@ exports.postAddPost = (req, res, next) => {
       res.redirect('/');
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -69,10 +75,15 @@ exports.getEditPost = (req, res, next) => {
         path: '/edit-post',
         editing: editMode,
         post: post,
+        hasError: false,
+        errorMessage: null,
+        validationErrors: [],
       });
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -92,7 +103,9 @@ exports.postEditPost = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -104,6 +117,8 @@ exports.postDeletePost = (req, res, next) => {
       res.redirect('/');
     })
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };

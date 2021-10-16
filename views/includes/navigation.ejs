@@ -1,9 +1,9 @@
 <div class="topnav">
-  <a class="active" href="/">Home</a>
-
+  <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
   <% if (isAuthenticated) { %>
-  <a href="/post">Post</a>
-  <a href="/profile/">Profile</a>
+  <a class="<%= path === '/post' ? 'active' : '' %>" href="/post">Post</a>
+
+  <!-- <a href="/profile/">Profile</a> -->
 
   <% } %>
 
@@ -11,9 +11,12 @@
   <% if (!isAuthenticated) { %>
   <!-- ----------------------------------- -->
 
-  <a href="/login">Login</a>
+  <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
 
-  <a href="/signup">Sign Up</a>
+  <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup"
+    >Sign Up</a
+  >
+
   <% } else { %>
   <form action="/logout" method="POST">
     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />

@@ -4,9 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mujib Sayyad",
   "license": "ISC",
@@ -20,12 +19,10 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "express-validator": "^6.13.0",
     "javascript-time-ago": "^2.3.9",
     "mongoose": "^6.0.8",
     "nodemailer": "^6.7.0",
     "nodemailer-sendinblue-transport": "^1.2.3"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.13"
   }
 }
