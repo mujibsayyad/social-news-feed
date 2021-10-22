@@ -5,8 +5,13 @@ const { validationResult } = require('express-validator');
 const TimeAgo = require('javascript-time-ago');
 const en = require('javascript-time-ago/locale/en.json');
 
+const { v4: uuidv4 } = require('uuid');
+
+console.log(uuidv4());
+
 const Posts = require('../models/post');
 const User = require('../models/user');
+const Token = require('../models/token');
 
 TimeAgo.addLocale(en);
 // Create formatter (English).
@@ -21,6 +26,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Login Page
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
 
@@ -42,6 +48,7 @@ exports.getLogin = (req, res, next) => {
   });
 };
 
+// Post Login
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -97,6 +104,7 @@ exports.postLogin = (req, res, next) => {
   });
 };
 
+// LogOut
 exports.postLogout = (req, res, next) => {
   req.session.destroy((err) => {
     // console.log(err);
@@ -104,6 +112,7 @@ exports.postLogout = (req, res, next) => {
   });
 };
 
+// SignUp Page
 exports.getSignUp = (req, res, next) => {
   let message = req.flash('error');
 
@@ -127,6 +136,7 @@ exports.getSignUp = (req, res, next) => {
   });
 };
 
+// Post SignUp
 exports.postSignUp = (req, res, next) => {
   const name = req.body.name;
   const email = req.body.email;
@@ -156,6 +166,7 @@ exports.postSignUp = (req, res, next) => {
         name: name,
         email: email,
         password: hashPassword,
+        isVerified: false,
       });
       return user.save();
     })
@@ -177,6 +188,7 @@ exports.postSignUp = (req, res, next) => {
     });
 };
 
+// Reset Password Page
 exports.getReset = (req, res, next) => {
   let message = req.flash('error');
 
@@ -193,6 +205,7 @@ exports.getReset = (req, res, next) => {
   });
 };
 
+// Post Reset Password
 exports.postReset = (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
@@ -231,6 +244,7 @@ exports.postReset = (req, res, next) => {
   });
 };
 
+// New Password Page
 exports.getNewPassword = (req, res, next) => {
   const token = req.params.token;
   User.findOne({
@@ -261,6 +275,7 @@ exports.getNewPassword = (req, res, next) => {
     });
 };
 
+// Post New Password Page
 exports.postNewPassword = (req, res, next) => {
   const newPassword = req.body.password;
   const userId = req.body.userId;
@@ -293,6 +308,7 @@ exports.postNewPassword = (req, res, next) => {
     });
 };
 
+// User Profile
 exports.userProfile = (req, res, next) => {
   const userId = req.params.user;
 
