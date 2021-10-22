@@ -1,3 +1,4 @@
+// NPM Packages
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
@@ -8,25 +9,35 @@ const mongoDbSession = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
 
-const User = require('./models/user');
-const errorController = require('./controllers/error');
-
 const app = express();
 
+// User Schema Import
+const User = require('./models/user');
+
+// 404 Page Controller
+const errorController = require('./controllers/error');
+
+// MongoDB URL
 const MONGODB_URI = process.env.db_url;
 
+// MongoDB Session from - mongoDbSession Package
 const mongoStoreSession = new mongoDbSession({
   uri: MONGODB_URI,
   collection: 'sessions',
 });
+
+// CSRF Protection Middleware
 const csrfProtection = csrf();
 
+// EJS View Engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+// Routes for all links
 const feedRoutes = require('./routes/routes');
 const authRoutes = require('./routes/authRoutes');
 
+// Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/public')));
 
@@ -69,6 +80,7 @@ app.use((req, res, next) => {
 app.use(feedRoutes);
 app.use(authRoutes);
 
+// Internal Server Error Code + 404 Page Error
 app.get('/500', errorController.get500);
 app.use(errorController.get404);
 
@@ -80,6 +92,7 @@ app.use((error, req, res, next) => {
   });
 });
 
+// Connect And Run App With MongoDB (Mongoose)
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {

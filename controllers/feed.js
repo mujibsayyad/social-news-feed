@@ -6,6 +6,7 @@ TimeAgo.addDefaultLocale(en);
 // Create formatter (English).
 const timeAgo = new TimeAgo('en-US');
 
+// Home Page (Index)
 exports.getIndex = (req, res, next) => {
   Posts.find()
     .populate('user')
@@ -37,6 +38,7 @@ exports.getPost = (req, res, next) => {
   });
 };
 
+// Post Page
 exports.postAddPost = (req, res, next) => {
   const title = req.body.title;
 
@@ -59,6 +61,7 @@ exports.postAddPost = (req, res, next) => {
     });
 };
 
+// Edit Post
 exports.getEditPost = (req, res, next) => {
   const editMode = req.query.edit;
   if (!editMode) {
@@ -87,6 +90,7 @@ exports.getEditPost = (req, res, next) => {
     });
 };
 
+// Post Edited Post
 exports.postEditPost = (req, res, next) => {
   const postId = req.body.postId;
   const updatedTitle = req.body.title;
@@ -109,6 +113,7 @@ exports.postEditPost = (req, res, next) => {
     });
 };
 
+// Delete Post
 exports.postDeletePost = (req, res, next) => {
   const postId = req.body.postId;
   Posts.deleteOne({ _id: postId, user: req.user._id })
