@@ -9,16 +9,15 @@ const mongoDbSession = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
 
-const app = express();
-
 // User Schema Import
 const User = require('./models/user');
-
 // 404 Page Controller
 const errorController = require('./controllers/error');
 
 // MongoDB URL
 const MONGODB_URI = process.env.db_url;
+
+const app = express();
 
 // MongoDB Session from - mongoDbSession Package
 const mongoStoreSession = new mongoDbSession({
