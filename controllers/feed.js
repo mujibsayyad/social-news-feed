@@ -127,3 +127,11 @@ exports.postDeletePost = (req, res, next) => {
       return next(error);
     });
 };
+
+// About Us Page
+exports.aboutUs = (req, res, next) => {
+  res.render('about', {
+    pageTitle: 'About Us',
+    path: '/about',
+  });
+};
