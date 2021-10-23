@@ -5,13 +5,8 @@ const { validationResult } = require('express-validator');
 const TimeAgo = require('javascript-time-ago');
 const en = require('javascript-time-ago/locale/en.json');
 
-const { v4: uuidv4 } = require('uuid');
-
-console.log(uuidv4());
-
 const Posts = require('../models/post');
 const User = require('../models/user');
-const Token = require('../models/token');
 
 TimeAgo.addLocale(en);
 // Create formatter (English).

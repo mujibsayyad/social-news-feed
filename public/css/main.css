@@ -192,6 +192,7 @@ iframe {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  background: #222831;
   /* padding: 15px;
   background: #9053c7;
   background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
@@ -202,7 +203,8 @@ iframe {
 
 .wrap-login100 {
   width: 960px;
-  background: #fff;
+  /* background: #fff; */
+  background: #222831;
   border-radius: 10px;
   overflow: hidden;
 

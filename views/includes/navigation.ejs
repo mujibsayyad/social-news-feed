@@ -10,13 +10,13 @@
   <!-- ************************************* -->
   <% if (!isAuthenticated) { %>
   <!-- ----------------------------------- -->
+  <div class="right">
+    <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
 
-  <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
-
-  <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup"
-    >Sign Up</a
-  >
-
+    <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup"
+      >Sign Up</a
+    >
+  </div>
   <% } else { %>
   <form action="/logout" method="POST">
     <input type="hidden" name="_csrf" value="<%= csrfToken %>" />

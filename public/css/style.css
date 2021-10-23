@@ -154,13 +154,16 @@ textarea:focus {
 
 .topnav {
   overflow: hidden;
-  background-color: #333;
+  /* background-color: #333; */
+  background: #222831;
   display: flex;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
 }
 
 .topnav a {
   float: left;
-  color: #f2f2f2;
+  color: #f9d342;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -168,13 +171,13 @@ textarea:focus {
 }
 
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #f9d342;
+  color: #292826;
 }
 
 .topnav a.active {
-  background-color: #04aa6d;
-  color: white;
+  background-color: #f9d342;
+  color: #292826;
 }
 
 /* ///////////////////////////////////////////////////////////////////////////////////////////// */
@@ -191,4 +194,11 @@ textarea:focus {
 .btn:active {
   background-color: #00695c;
   color: white;
+}
+
+.right {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2rem;
 }
