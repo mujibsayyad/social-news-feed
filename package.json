@@ -8,6 +8,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mujib Sayyad",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/themujib"
+  },
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -22,8 +26,6 @@
     "express-validator": "^6.13.0",
     "javascript-time-ago": "^2.3.9",
     "mongoose": "^6.0.8",
-    "nodemailer": "^6.7.0",
-    "nodemailer-sendinblue-transport": "^1.2.3",
-    "uuid": "^8.3.2"
+    "nodemailer": "^6.7.0"
   }
 }
