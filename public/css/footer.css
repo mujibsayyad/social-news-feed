@@ -1,0 +1,28 @@
+.footer-07 {
+  background-color: black;
+  text-align: center;
+  color: aliceblue;
+  padding: 2rem;
+  line-height: 2rem;
+  letter-spacing: 0.1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-07 a {
+  color: aliceblue;
+  text-decoration: none;
+}
+
+.text-center,
+h2 {
+  margin-bottom: 2rem;
+}
+
+.text-center ul {
+  text-align: none;
+  list-style-type: none;
+  padding: 1rem;
+}
+.text-center a {
+  margin-right: 2rem;
+}
